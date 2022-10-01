@@ -1,0 +1,86 @@
+/* 
+- crear package.json
+$ npm init --yes
+
+-instalar sass
+$ npm i -g node-sass
+
+- para compilar sass
+node-sass -o css scss/main.css 
+
+- para ejecutar script en package.json, se puede poner cualquiera
+npm run watch
+
+*/
+
+@import './test';
+
+$color-primary: orange;
+$color-secondary: gray;
+$color-tertiary: royalblue;
+
+$font-lg: 40px;
+$font-md: 30px;
+$font-sm: 20px;
+
+@mixin trasition($param...) {
+    transition: $param;
+}
+
+@mixin headingStyles($fontSize: 50px) {
+    font-size: $fontSize;
+    color: $color-secondary;
+    text-align: center;
+}
+
+@function fontSize($size: 25px) {
+    @return $size * 2;
+}
+
+.nav {
+    background-color: $color-primary;
+    
+    ul li {
+        list-style: none;  
+        
+        a {
+            text-decoration: none;
+            font-size: $font-sm;
+            color: $color-secondary;
+
+            &:hover {
+                color: $color-tertiary;
+            }
+        }
+    }
+}
+
+.heading {
+    color: $color-primary;
+    font-size: $font-lg;
+    background-color: $color-secondary;
+    text-align: center;
+}
+
+h1 {
+    /* @include headingStyles($font-lg); */
+    @extend .heading;
+
+    &:hover {
+        background-color: green;
+    }
+}
+
+.footer h3 {
+    @include headingStyles($font-md);
+    @include trasition(color .5s, background-color 1s);
+
+    &:hover {
+        color: $color-tertiary;
+        background-color: $color-primary;
+    }
+}
+
+.banner p {
+    font-size: fontSize(20px)
+}
