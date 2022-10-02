@@ -1,3 +1,9 @@
-@import "./base";
-@import "./layout";
-@import "./components";
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+
+@import "./base/base";
+@import "./layouts/header";
+@import "./layouts/navigation";
+@import "./components/logo";
+@import "./components/heading";
+@import "./components/dropdown";

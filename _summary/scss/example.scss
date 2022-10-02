@@ -1,0 +1,196 @@
+/* 
+- crear package.json
+$ npm init --yes
+
+-instalar sass
+$ npm i -g node-sass
+
+- para compilar sass
+node-sass -o css scss/main.css 
+
+- para ejecutar script en package.json, se puede poner cualquiera
+npm run watch
+
+*/
+
+/* ------------------- tipos de variables -------------------- */
+// Numbers
+.numbers {
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 20px; // rem, em, %
+}
+
+// Strings
+.strings {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+
+// Colors
+.colors {
+    color: red;
+    background-color: #ff0000;
+    border-color: rgb(255, 0, 0); // rgba(255, 0, 0, .5)
+    outline-color: hsl(0, 100%, 50%);
+}
+
+// Lists
+.lists {
+    margin: 10px 15px 5px 20px;
+    font-family: 'Raleway', 'Dosis', 'Lato';
+    border: 1px solid red;
+}
+
+// Maps
+$colors: (
+    "primary": red,
+    2: green,
+    3: blue
+);
+
+/* map-get: obtiene de la lista en maps */
+h1 {
+    color: map-get($colors, primary);
+    background-color: map-get($colors, 2);
+}
+
+// Booleans
+// true, false
+
+// null
+
+
+/* --------- Interpolation ----------- */
+$b: "border";
+$c: "color";
+
+h2 {
+    box-sizing: #{$b}-box;
+    #{$b}: 1px solid blue;
+    #{$c}: red;
+    background-#{$c}: green;
+}
+
+
+/* ---------- Loops ------------------ */
+$colors: (
+    1: red,
+    2: green, 
+    3: blue,
+    4: orange
+);
+
+/* en vez de to se puede usar through donde el 4 se incluye*/
+@for $i from 1 to 4 {
+    .paragraph-#{$i} {
+        background-color: map-get($colors, $i);
+    }
+}
+
+/* ------- each loop ---------- */
+$colors-text: red green blue orange;
+
+@each $color in $colors-text {
+    .paragraph-#{$color} {
+        color: $color;
+    }
+}
+
+
+
+/* ---------- if directive ----------- */
+//h1 {
+//    @if(false) {
+//        color: red;
+//    }
+//}
+
+@mixin headingSize($size) {
+    @if($size == large) {
+        font-size: 45px;
+    } @else if($size == medium) {
+        font-size: 30px;
+    } @else {
+        font-size: 15px;
+    }
+}
+
+h1.if {
+    @include headingSize(small);
+}
+
+
+
+@import './test';
+
+$color-primary: orange;
+$color-secondary: gray;
+$color-tertiary: royalblue;
+
+$font-lg: 40px;
+$font-md: 30px;
+$font-sm: 20px;
+
+@mixin trasition($param...) {
+    transition: $param;
+}
+
+@mixin headingStyles($fontSize: 50px) {
+    font-size: $fontSize;
+    color: $color-secondary;
+    text-align: center;
+}
+
+@function fontSize($size: 25px) {
+    @return $size * 2;
+}
+
+.nav {
+    background-color: $color-primary;
+    
+    ul li {
+        list-style: none;  
+        
+        a {
+            text-decoration: none;
+            font-size: $font-sm;
+            color: $color-secondary;
+
+            &:hover {
+                color: $color-tertiary;
+            }
+        }
+    }
+}
+
+.heading {
+    color: $color-primary;
+    font-size: $font-lg;
+    background-color: $color-secondary;
+    text-align: center;
+}
+
+h1 {
+    /* @include headingStyles($font-lg); */
+    @extend .heading;
+
+    &:hover {
+        background-color: green;
+    }
+}
+
+.footer h3 {
+    @include headingStyles($font-md);
+    @include trasition(color .5s, background-color 1s);
+
+    &:hover {
+        color: $color-tertiary;
+        background-color: $color-primary;
+    }
+}
+
+.banner p {
+    font-size: fontSize(20px)
+}

@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+html {
+    // 10 / 16 = .625 * 100 = 62.5%  porque 1 rem = 16px, entonces reducimos el 
+    // fontsize del html para que sea de 1 rem = 10 px
+    font-size: 62.5%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: minmax(6rem, 1fr) repeat(8, minmax(min-content, 16rem)) minmax(6rem, 1fr);
+    grid-template-rows: repeat(4, min-content);
+    grid-row-gap: 1.6rem;
+    background-color: color(tertiary);
+}
+
