@@ -8,6 +8,14 @@ html {
     // 10 / 16 = .625 * 100 = 62.5%  porque 1 rem = 16px, entonces reducimos el 
     // fontsize del html para que sea de 1 rem = 10 px
     font-size: 62.5%;
+
+    @include response(md) {
+        font-size: 56.25%; //9 / 16
+    }
+
+    @include response(md) {
+        font-size: 50%; //8 / 16
+    }
 }
 
 .container {
